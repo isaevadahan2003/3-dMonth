@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="text-align: center;">
+    <h1>Hello to my blog, hi friends</h1>
+<ul>
+        {% for i in blogs %}
+        <li>
+            <h1><a href="/blog/{{ i.id }}/">{{ i.title }}</a></h1>
+            <h5><a href="/blog/{{ i.id }}/">{{ i.description }}</a></h5>
+            <p>
+                <a href="/blog/{{ i.id }}/">
+                    <img src="{{i.image.url}}" width = "400px" height="400px" alt="">
+                </a>
+            <p>Лайки:{{ i.likes }} Репосты: {{ i.reposts }}</p>
+
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
