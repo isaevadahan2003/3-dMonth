@@ -8,17 +8,20 @@
     <h1>{{ blog.title }}</h1>
     <img src="{{blog.image.url}}" width = "400px" height="400px" alt="">
     <p>{{ blog.description }}</p>
-
+    <a href="change/"><button>Change Post</button></a>
     {% for i in comments %}
         <h2>{{ i.text }}</h2>
-    <form method="post">
+    {% endfor %}
+    <form method="post" action="/blog/comment/{{ blog.id }}/">
         {% csrf_token %}
         <p>
-            <input id="text" name = "text" placeholder = "Leave a comment" type="text">
+            <input name = "text" placeholder = "Leave a comment" type="text">
 
-            <input id="submit" value="Add" type="submit">
+            <input value="Add" type="submit">
         </p>
     </form>
-    {% endfor %}
+
+
+
 </body>
 </html>

@@ -10,6 +10,9 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title[:15]
 
+    def get_absolute_url(self):
+        return f"/blog/{self.pk}/"
+
 class Comment(models.Model):
     text = models.CharField(max_length=150)
     date = models.DateTimeField(auto_now_add=True)

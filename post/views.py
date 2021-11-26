@@ -2,7 +2,7 @@ from typing import List
 from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from .models import BlogPost, Comment
 
 def hello_world_view(request):
@@ -39,8 +39,8 @@ class PostListView(ListView):
     context_object_name = "blogs"
 
 
-def create_comment(self, request, **kwargs):
-    post_id = self.kwargs['pk']
+def create_comment(request, **kwargs):
+    post_id = kwargs['pk']
     if request.method == "POST":
         data: dict = request.POST
         if data.get("text"):
@@ -48,3 +48,12 @@ def create_comment(self, request, **kwargs):
             return redirect(f'/blog/{post_id}/')
         else:
             return HttpResponse("error")
+
+class PostChangeView(UpdateView):
+    model = BlogPost
+    fields = {
+        "image",
+        "title",
+        "description"
+    }
+    template_name = "blog_change.html"
